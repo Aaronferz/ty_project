@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        /* ... copy relevant styles from teacher_welcome.html ... */
+        .notice-list {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .notice-item {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            color: black;
+        }
+        .notice-item strong {
+            color: #2980b9;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .notice-item p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Add your student dashboard sidebar/header here -->
+        <div class="content">
+            <h2>Notices</h2>
+            <div id="notice" class="dashboard-section">
+                <h2>Notice Board</h2>
+                <hr>
+                <div id="notice-list" class="notice-list">
+                    <!-- Notices will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function displayNotice(notice) {
+            const noticeList = document.getElementById('notice-list');
+            
+            const noticeItem = document.createElement('div');
+            noticeItem.className = 'notice-item';
+            noticeItem.innerHTML = `
+                <strong>${notice.title}</strong>
+                <span style="color: #666; font-size: 0.8em;">${notice.timestamp}</span>
+                <p>${notice.content}</p>
+            `;
+            
+            noticeList.insertBefore(noticeItem, noticeList.firstChild);
+        }
+
+        function loadNotices() {
+            const notices = JSON.parse(localStorage.getItem('notices') || '[]');
+            const noticeList = document.getElementById('notice-list');
+            noticeList.innerHTML = ''; // Clear existing notices
+            
+            notices.forEach(notice => {
+                displayNotice(notice);
+            });
+        }
+
+        // Load notices when page loads
+        document.addEventListener('DOMContentLoaded', loadNotices);
+    </script>
+</body>
+</html> 

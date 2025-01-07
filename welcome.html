@@ -1,0 +1,337 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Management System</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f4f8;
+            }
+            .container {
+                display: flex;
+            }
+            .sidebar {
+                width: 200px;
+                background-color: rgba(57, 57, 206, 0.89);
+                height: 100vh;
+                padding: 20px;
+                color: white;
+            }
+            .profile-button {
+                background-color: #3498db;
+                border: none;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                cursor: pointer;
+                overflow: hidden;
+                padding: 0;
+                margin: 0 auto 20px;
+                transition: transform 0.3s;
+            }
+            .profile-button:hover {
+                transform: scale(1.05);
+            }
+            .profile-button img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .menu {
+                margin-top: 20px;
+            }
+            .menu-item {
+                padding: 10px;
+                cursor: pointer;
+                background-color: #000000;
+                border: none;
+                width: 100%;
+                text-align: left;
+                margin-bottom: 5px;
+                color: white;
+                border-radius: 3px;
+            }
+            .menu-item:hover, .menu-item.active {
+                background-color: #2980b9;
+            }
+            .header {
+                background-color: rgba(57, 57, 206, 0.89);
+                color: white;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+            }
+            .header h1 {
+                margin: 0;
+                font-size: 24px;
+            }
+            .content {
+                flex-grow: 1;
+                padding: 20px;
+                background-color: #ecf0f1;
+            }
+            .main-content {
+                background-color: rgba(57, 57, 206, 0.89);
+                border-radius: 5px;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .dashboard {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                margin-top: 20px;
+            }
+            .dashboard-item {
+                background-color: black;
+                border-radius: 5px;
+                padding: 20px;
+                width: 22%;
+                text-align: center;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                margin-bottom: 20px;
+            }
+            .dashboard-section h2 {
+                margin-bottom: 10px;
+                color: white;
+            }
+            .dashboard-section hr {
+                border: 5px solid rgb(0, 0, 0);
+                height: 1px;
+                background-color: #000000;
+                margin-bottom: 20px;
+            }
+            .dashboard-item p {
+                font-size: 24px;
+                font-weight: bold;
+                margin: 10px 0 0;
+                color: white;
+            }
+            .dashboard-section {
+                display: none;
+            }
+            .dashboard-section.active {
+                display: block;
+            }
+            .no-notice {
+                text-align: center;
+                padding: 40px;
+                background-color: #f8f9fa;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+            .no-notice h3 {
+                color: #2c3e50;
+                margin-bottom: 10px;
+            }
+            .no-notice p {
+                color: #7f8c8d;
+            }
+            .attendance-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+                background-color: white;
+                color: black;
+            }
+            .attendance-table th, .attendance-table td {
+                border: 2px solid #333;
+                padding: 12px;
+                text-align: left;
+            }
+            .attendance-table th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            .attendance-table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .attendance-total {
+                margin-top: 20px;
+                font-weight: bold;
+                color: white;
+            }
+            .schedule-message {
+                text-align: center;
+                padding: 40px;
+                background-color: #f8f9fa;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+            .schedule-message h3 {
+                color: #2c3e50;
+                margin-bottom: 10px;
+            }
+            .notice-board {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                margin: 20px;
+                max-width: 800px;
+            }
+            
+            .notice {
+                border-bottom: 1px solid #ddd;
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+            
+            .notice-title {
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 5px;
+            }
+            
+            .notice-date {
+                color: #666;
+                font-size: 0.9em;
+                margin-bottom: 10px;
+            }
+            
+            .notice-content {
+                color: #444;
+                line-height: 1.5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="sidebar">
+                <button class="profile-button">
+                    <img src="profile.jpg" alt="Profile Picture">
+                </button>
+                <div class="menu">
+                    <button class="menu-item active" data-section="home">Home</button>
+                    <button class="menu-item" data-section="attendance">Attendance</button>
+                    <button class="menu-item" data-section="notice">Notice</button>
+                    <button class="menu-item" data-section="schedule">Schedule</button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="header">
+                <h1>Student Dashboard</h1>
+                </div>
+                <div class="main-content">
+                <div id="home" class="dashboard-section active">
+                    <h2 style="font: bold;">Home Dashboard:</h2>
+                    
+                    <div class="dashboard">
+                        <div class="dashboard-item">
+                            <h2>Total Lectures</h2>
+                            <p>120</p>
+                        </div>
+                        <div class="dashboard-item">
+                            <h2>Lectures Attended</h2>
+                            <p>102</p>
+                        </div>
+                        <div class="dashboard-item">
+                            <h2>Total Subjects</h2>
+                            <p>6</p>
+                        </div>
+                        <div class="dashboard-item">
+                            <h2>Overall Attendance</h2>
+                            <p>85%</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="attendance" class="dashboard-section">
+                    <h2>Attendance </h2>
+                    <hr>
+                    <table class="attendance-table">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Attendance</th>
+                        </tr>
+                        <tr>
+                            <td>Maths</td>
+                            <td>25/30</td>
+                        </tr>
+                        <tr>
+                            <td>Physics</td>
+                            <td>28/30</td>
+                        </tr>
+                        <tr>
+                            <td>Biology</td>
+                            <td>27/30</td>
+                        </tr>
+                        <tr>
+                            <td>Chemistry</td>
+                            <td>26/30</td>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td>29/30</td>
+                        </tr>
+                    </table>
+                    <div class="attendance-total">
+                        <p>Total Lectures Attended: 135/150</p>
+                        <p>Overall Attendance: 90%</p>
+                    </div>
+                </div>
+                <div id="notice" class="dashboard-section">
+                    <div class="notice-board">
+                        <h2>Notice Board</h2>
+                        <div id="notices-container">
+                            <!-- Notices will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+                <div id="schedule" class="dashboard-section">
+                    <div class="schedule-message">
+                        <h3>Schedule will be updated soon</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const menuItems = document.querySelectorAll('.menu-item');
+                const dashboardSections = document.querySelectorAll('.dashboard-section');
+
+                menuItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const sectionId = this.getAttribute('data-section');
+
+                        // Remove active class from all menu items and sections
+                        menuItems.forEach(mi => mi.classList.remove('active'));
+                        dashboardSections.forEach(ds => ds.classList.remove('active'));
+
+                        // Add active class to clicked menu item and corresponding section
+                        this.classList.add('active');
+                        document.getElementById(sectionId).classList.add('active');
+                    });
+            });
+
+            // Modified event listener for the profile button
+            document.querySelector('.profile-button').addEventListener('click', function() {
+                window.location.href = 'profile.html'; // Open profile.html in the same page
+            });
+            });
+
+            function displayNotices() {
+                const noticesContainer = document.getElementById('notices-container');
+                const notices = JSON.parse(localStorage.getItem('notices') || '[]');
+                
+                if (notices.length === 0) {
+                    noticesContainer.innerHTML = '<p>No notices available.</p>';
+                    return;
+                }
+                
+                noticesContainer.innerHTML = notices.map(notice => `
+                    <div class="notice">
+                        <div class="notice-title">${notice.title}</div>
+                        <div class="notice-date">${notice.date}</div>
+                        <div class="notice-content">${notice.content}</div>
+                    </div>
+                `).join('');
+            }
+
+            // Call this when the page loads
+            window.onload = displayNotices;
+        </script>
+    </body>
+    </html>
