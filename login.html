@@ -1,0 +1,122 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            background-image: url(loginbg.png);
+            background-repeat: no-repeat;
+            background-position:center;
+            background-size:cover;
+        }
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .login-form {
+            display: none;
+        }
+        .login-form.active {
+            display: block;
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3ba5e7;
+        }
+        .toggle-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            margin-top: 20px;
+        }
+        .register-btn {
+            background-color: #4CAF50;
+            color: white;
+            margin-top: 10px;
+        }
+        .register-btn:hover {
+            background-color: #3ba5e7;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Student Management System</h1>
+        <div id="studentLogin" class="login-form active">
+            <h2>Student Login</h2>
+            <form onsubmit="return handleLogin('student')">
+                <input type="text" id="studentId" placeholder="Student ID" required>
+                <input type="password" id="studentPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <button class="register-btn" onclick="window.location.href='register.html'">New Registration</button>
+            <button class="toggle-btn" onclick="toggleForm('teacherLogin')">Switch to Teacher Login</button>
+        </div>
+        <div id="teacherLogin" class="login-form">
+            <h2>Teacher Login</h2>
+            <form onsubmit="return handleLogin('teacher')">
+                <input type="text" id="teacherId" placeholder="Teacher ID" required>
+                <input type="password" id="teacherPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <button class="register-btn" onclick="window.location.href='teacher_register.html'">New Registration</button>
+            <button class="toggle-btn" onclick="toggleForm('studentLogin')">Switch to Student Login</button>
+        </div>
+    </div>
+    <script>
+        function toggleForm(formId) {
+            document.querySelector('.login-form.active').classList.remove('active');
+            document.getElementById(formId).classList.add('active');
+        }
+
+        function handleLogin(userType) {
+            var id, password;
+            if (userType === 'student') {
+                id = document.getElementById('studentId').value;
+                password = document.getElementById('studentPassword').value;
+                if (id === '123' && password === '123') {
+                    window.location.href = 'welcome.html';
+                    return false;
+                }
+            } else {
+                id = document.getElementById('teacherId').value;
+                password = document.getElementById('teacherPassword').value;
+                if (id === 'abc' && password === 'abc') {
+                    window.location.href = 'teacher_welcome.html';
+                    return false;
+                }
+            }
+            alert('Invalid credentials. Please try again.');
+            return false;
+        }
+    </script>
+</body>
+</html>
+ 
