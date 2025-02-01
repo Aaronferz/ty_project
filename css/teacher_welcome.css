@@ -1,0 +1,302 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+}
+.container {
+    display: flex;
+}
+.sidebar {
+    width: 200px;
+    background-color: rgba(57, 57, 206, 0.89);
+    height: 100vh;
+    padding: 20px;
+    color: white;
+}
+.profile-button {
+    background-color: #3498db;
+    border: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+    margin: 0 auto 20px;
+    transition: transform 0.3s;
+}
+.profile-button:hover {
+    transform: scale(1.05);
+}
+.profile-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.menu {
+    margin-top: 20px;
+}
+.menu-item {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #000000;
+    border: none;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+    color: white;
+    border-radius: 3px;
+}
+.menu-item:hover, .menu-item.active {
+    background-color: #2980b9;
+}
+.header {
+    background-color: rgba(57, 57, 206, 0.89);
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ecf0f1;
+}
+.main-content {
+    background-color: rgba(57, 57, 206, 0.89);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.dashboard-item {
+    background-color: black;
+    border-radius: 5px;
+    padding: 20px;
+    width: 22%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+.dashboard-section h2 {
+    margin-bottom: 10px;
+    color: white;
+}
+.dashboard-section hr {
+    border: 5px solid rgb(0, 0, 0);
+    height: 1px;
+    background-color: #000000;
+    margin-bottom: 20px;
+}
+.dashboard-item p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0 0;
+    color: white;
+}
+.dashboard-section {
+    display: none;
+}
+.dashboard-section.active {
+    display: block;
+}
+.notice-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.notice-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+.notice-form button {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.notice-form button:hover {
+    background-color: #2980b9;
+}
+.notice-list {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+.notice-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    color: black;
+}
+.notice-item:last-child {
+    border-bottom: none;
+}
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    color: black;
+}
+.attendance-table th, .attendance-table td {
+    border: 2px solid #333;
+    padding: 12px;
+    text-align: left;
+}
+.attendance-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+.attendance-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.attendance-total {
+    margin-top: 20px;
+    font-weight: bold;
+    color: white;
+}
+.schedule-message {
+    text-align: center;
+    padding: 40px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.schedule-message h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+.attendance-form {
+    display: none;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.attendance-form.show {
+    display: block;
+}
+.attendance-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.attendance-form button {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.attendance-form button:hover {
+    background-color: #2980b9;
+}
+.student-list {
+    display: none;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.student-list.show {
+    display: block;
+}
+.student-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.student-info {
+    flex: 1;
+    color: black;
+}
+.attendance-buttons button {
+    padding: 8px 16px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    opacity: 0.7;
+}
+.present-btn {
+    background-color: #2ecc71;
+}
+.absent-btn {
+    background-color: #e74c3c;
+}
+.present-btn:hover {
+    background-color: #27ae60;
+}
+.absent-btn:hover {
+    background-color: #c0392b;
+}
+.attendance-buttons button.selected {
+    opacity: 1;
+}
+.notice-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 100px;
+}
+.send-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.send-btn:hover {
+    background-color: #45a049;
+}
+.notice-list {
+    margin-top: 20px;
+}
+.notice-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.notice-item strong {
+    color: #2980b9;
+    display: block;
+    margin-bottom: 5px;
+}
+textarea {
+    width: 100%;
+    min-height: 100px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

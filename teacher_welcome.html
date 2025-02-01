@@ -4,316 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f4f8;
-        }
-        .container {
-            display: flex;
-        }
-        .sidebar {
-            width: 200px;
-            background-color: rgba(57, 57, 206, 0.89);
-            height: 100vh;
-            padding: 20px;
-            color: white;
-        }
-        .profile-button {
-            background-color: #3498db;
-            border: none;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            cursor: pointer;
-            overflow: hidden;
-            padding: 0;
-            margin: 0 auto 20px;
-            transition: transform 0.3s;
-        }
-        .profile-button:hover {
-            transform: scale(1.05);
-        }
-        .profile-button img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .menu {
-            margin-top: 20px;
-        }
-        .menu-item {
-            padding: 10px;
-            cursor: pointer;
-            background-color: #000000;
-            border: none;
-            width: 100%;
-            text-align: left;
-            margin-bottom: 5px;
-            color: white;
-            border-radius: 3px;
-        }
-        .menu-item:hover, .menu-item.active {
-            background-color: #2980b9;
-        }
-        .header {
-            background-color: rgba(57, 57, 206, 0.89);
-            color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: #ecf0f1;
-        }
-        .main-content {
-            background-color: rgba(57, 57, 206, 0.89);
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .dashboard {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        .dashboard-item {
-            background-color: black;
-            border-radius: 5px;
-            padding: 20px;
-            width: 22%;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .dashboard-section h2 {
-            margin-bottom: 10px;
-            color: white;
-        }
-        .dashboard-section hr {
-            border: 5px solid rgb(0, 0, 0);
-            height: 1px;
-            background-color: #000000;
-            margin-bottom: 20px;
-        }
-        .dashboard-item p {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 10px 0 0;
-            color: white;
-        }
-        .dashboard-section {
-            display: none;
-        }
-        .dashboard-section.active {
-            display: block;
-        }
-        .notice-form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .notice-form textarea {
-            width: 100%;
-            min-height: 100px;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            resize: vertical;
-        }
-        .notice-form button {
-            padding: 10px 20px;
-            background-color: #000000;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .notice-form button:hover {
-            background-color: #2980b9;
-        }
-        .notice-list {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .notice-item {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            color: black;
-        }
-        .notice-item:last-child {
-            border-bottom: none;
-        }
-        .attendance-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-            color: black;
-        }
-        .attendance-table th, .attendance-table td {
-            border: 2px solid #333;
-            padding: 12px;
-            text-align: left;
-        }
-        .attendance-table th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        .attendance-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .attendance-total {
-            margin-top: 20px;
-            font-weight: bold;
-            color: white;
-        }
-        .schedule-message {
-            text-align: center;
-            padding: 40px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .schedule-message h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        .attendance-form {
-            display: none;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .attendance-form.show {
-            display: block;
-        }
-        .attendance-form select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .attendance-form button {
-            padding: 10px 20px;
-            background-color: #000000;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .attendance-form button:hover {
-            background-color: #2980b9;
-        }
-        .student-list {
-            display: none;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .student-list.show {
-            display: block;
-        }
-        .student-row {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        .student-info {
-            flex: 1;
-            color: black;
-        }
-        .attendance-buttons button {
-            padding: 8px 16px;
-            margin-left: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            color: white;
-            opacity: 0.7;
-        }
-        .present-btn {
-            background-color: #2ecc71;
-        }
-        .absent-btn {
-            background-color: #e74c3c;
-        }
-        .present-btn:hover {
-            background-color: #27ae60;
-        }
-        .absent-btn:hover {
-            background-color: #c0392b;
-        }
-        .attendance-buttons button.selected {
-            opacity: 1;
-        }
-        .notice-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            resize: vertical;
-            min-height: 100px;
-        }
-        .send-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .send-btn:hover {
-            background-color: #45a049;
-        }
-        .notice-list {
-            margin-top: 20px;
-        }
-        .notice-item {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 10px;
-        }
-        .notice-item strong {
-            color: #2980b9;
-            display: block;
-            margin-bottom: 5px;
-        }
-        textarea {
-            width: 100%;
-            min-height: 100px;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/teacher_welcome.css">
 </head>
 <body>
     <div class="container">
         <div class="sidebar">
             <button class="profile-button">
-                <img src="profile.jpg" alt="Profile Picture">
+                <img src="mediafiles/pookie.png" alt="Profile Picture">
             </button>
             <div class="menu">
                 <button class="menu-item" data-section="attendance">Attendance</button>
@@ -323,231 +20,71 @@
         </div>
         <div class="content">
             <div class="header">
-            <h1>Teacher Dashboard</h1>
+                <h1>Teacher Dashboard</h1>
             </div>
             <div class="main-content">
-            <div id="attendance" class="dashboard-section active">
-                <h2>Attendance </h2>
-                <hr>
-                <button id="edit-attendance-btn" style="
-                    padding: 12px 24px;
-                    background-color: #000000;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    font-size: 16px;
-                    margin: 20px auto;
-                    display: block;
-                ">Edit Attendance</button>
-                <div id="attendance-form" class="attendance-form">
-                    <select id="year" required>
-                        <option value="">Select Year</option>
-                        <option value="FY">First Year</option>
-                        <option value="SY">Second Year</option>
-                        <option value="TY">Third Year</option>
-                        <option value="Final">Final Year</option>
-                    </select>
-                    <select id="department" required>
-                        <option value="">Select Department</option>
-                        <option value="CS">Computer Science</option>
-                        <option value="IT">Information Technology</option>
-                        <option value="MECH">Mechanical</option>
-                        <option value="CIVIL">Civil</option>
-                    </select>
-                    <select id="division" required>
-                        <option value="">Select Division</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                    </select>
-                    <button onclick="submitAttendanceForm()">Submit</button>
+                <div id="attendance" class="dashboard-section active">
+                    <h2>Attendance</h2>
+                    <hr>
+                    <button id="edit-attendance-btn" style="
+                        padding: 12px 24px;
+                        background-color: #000000;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-size: 16px;
+                        margin: 20px auto;
+                        display: block;
+                    ">Edit Attendance</button>
+                    <div id="attendance-form" class="attendance-form">
+                        <select id="year" required>
+                            <option value="">Select Year</option>
+                            <option value="FY">First Year</option>
+                            <option value="SY">Second Year</option>
+                            <option value="TY">Third Year</option>
+                            <option value="Final">Final Year</option>
+                        </select>
+                        <select id="department" required>
+                            <option value="">Select Department</option>
+                            <option value="CS">Computer Science</option>
+                            <option value="IT">Information Technology</option>
+                            <option value="MECH">Mechanical</option>
+                            <option value="CIVIL">Civil</option>
+                        </select>
+                        <select id="division" required>
+                            <option value="">Select Division</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                        </select>
+                        <button onclick="submitAttendanceForm()">Submit</button>
+                    </div>
+                    <div id="student-list" class="student-list">
+                        <!-- Student list will be populated here -->
+                    </div>
                 </div>
-                <div id="student-list" class="student-list">
-                    <!-- Student list will be populated here -->
+                <div id="notice" class="dashboard-section">
+                    <h2>Notice Board</h2>
+                    <hr>
+                    <div class="notice-form">
+                        <input type="text" id="noticeTeacherName" placeholder="Teacher Name" class="notice-input" style="min-height: 40px;">
+                        <textarea id="noticeText" placeholder="Type your notice here..."></textarea>
+                        <input type="date" id="noticeEndDate" required>
+                        <button onclick="postNotice()" class="send-btn">Send Notice</button>
+                    </div>
+                    <div id="notice-list" class="notice-list">
+                        <!-- Notices will be displayed here -->
+                    </div>
                 </div>
-            </div>
-            <div id="notice" class="dashboard-section">
-                <h2>Notice Board</h2>
-                <hr>
-                <div class="notice-form">
-                    <input type="text" id="noticeTitle" placeholder="Notice Title" class="notice-input" style="min-height: 40px;">
-                    <textarea id="noticeContent" placeholder="Type your notice here..."></textarea>
-                    <button onclick="postNotice()" class="send-btn">Send Notice</button>
-                </div>
-                <div id="notice-list" class="notice-list">
-                    <!-- Notices will be displayed here -->
-                </div>
-            </div>
-            <div id="schedule" class="dashboard-section">
-                <div class="schedule-message">
-                    <h3>Schedule will be updated soon</h3>
+                <div id="schedule" class="dashboard-section">
+                    <div class="schedule-message">
+                        <h3>Schedule will be updated soon</h3>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        const firstNames = ['John', 'Emma', 'Michael', 'Sophia', 'William', 'Olivia', 'James', 'Ava', 'Alexander', 'Isabella'];
-        const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
-        
-        function getRandomName() {
-            const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-            return `${firstName} ${lastName}`;
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuItems = document.querySelectorAll('.menu-item');
-            const dashboardSections = document.querySelectorAll('.dashboard-section');
-
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const sectionId = this.getAttribute('data-section');
-                    menuItems.forEach(mi => mi.classList.remove('active'));
-                    dashboardSections.forEach(ds => ds.classList.remove('active'));
-                    this.classList.add('active');
-                    document.getElementById(sectionId).classList.add('active');
-                });
-            });
-
-            document.querySelector('.profile-button').addEventListener('click', function() {
-                window.location.href = 'profile.html';
-            });
-
-            document.getElementById('edit-attendance-btn').addEventListener('click', function() {
-                const form = document.getElementById('attendance-form');
-                form.classList.toggle('show');
-            });
-        });
-
-        function submitAttendanceForm() {
-            const year = document.getElementById('year').value;
-            const department = document.getElementById('department').value;
-            const division = document.getElementById('division').value;
-
-            if (!year || !department || !division) {
-                alert('Please select all fields');
-                return;
-            }
-
-            const form = document.getElementById('attendance-form');
-            form.classList.remove('show');
-            
-            const studentList = document.getElementById('student-list');
-            studentList.innerHTML = '';
-            
-            // Number of students based on department
-            let studentCount = 50; // Default count
-            if (department === 'CS') {
-                studentCount = 60;
-            } else if (department === 'MECH') {
-                studentCount = 70;
-            } else if (department === 'CIVIL') {
-                studentCount = 55;
-            }
-            
-            for (let i = 1; i <= studentCount; i++) {
-                const studentRow = document.createElement('div');
-                studentRow.className = 'student-row';
-                
-                const studentInfo = document.createElement('div');
-                studentInfo.className = 'student-info';
-                studentInfo.textContent = `${i}. ${getRandomName()}`;
-                
-                const buttonsDiv = document.createElement('div');
-                buttonsDiv.className = 'attendance-buttons';
-                
-                const presentBtn = document.createElement('button');
-                presentBtn.className = 'present-btn';
-                presentBtn.textContent = 'Present';
-                
-                const absentBtn = document.createElement('button');
-                absentBtn.className = 'absent-btn';
-                absentBtn.textContent = 'Absent';
-                
-                presentBtn.onclick = () => toggleAttendance(presentBtn, absentBtn);
-                absentBtn.onclick = () => toggleAttendance(absentBtn, presentBtn);
-                
-                buttonsDiv.appendChild(presentBtn);
-                buttonsDiv.appendChild(absentBtn);
-                
-                studentRow.appendChild(studentInfo);
-                studentRow.appendChild(buttonsDiv);
-                studentList.appendChild(studentRow);
-            }
-            
-            studentList.classList.add('show');
-        }
-
-        function toggleAttendance(selectedBtn, otherBtn) {
-            // Remove selected class from other button
-            otherBtn.classList.remove('selected');
-            // Toggle selected class on clicked button
-            selectedBtn.classList.add('selected');
-        }
-
-        function postNotice() {
-            const title = document.getElementById('noticeTitle').value;
-            const content = document.getElementById('noticeContent').value;
-            
-            if (!title || !content) {
-                alert('Please fill in both title and content');
-                return;
-            }
-
-            const notice = {
-                title: title,
-                content: content,
-                timestamp: new Date().toLocaleString(),
-                id: Date.now() // unique identifier for each notice
-            };
-            
-            // Get existing notices or initialize empty array
-            let notices = JSON.parse(localStorage.getItem('notices') || '[]');
-            
-            // Add new notice at the beginning of the array
-            notices.unshift(notice);
-            
-            // Save to localStorage
-            localStorage.setItem('notices', JSON.stringify(notices));
-            
-            // Update the display
-            displayNotice(notice);
-            
-            // Clear the form
-            document.getElementById('noticeTitle').value = '';
-            document.getElementById('noticeContent').value = '';
-            
-            alert('Notice posted successfully!');
-        }
-
-        function displayNotice(notice) {
-            const noticeList = document.getElementById('notice-list');
-            
-            const noticeItem = document.createElement('div');
-            noticeItem.className = 'notice-item';
-            noticeItem.innerHTML = `
-                <strong>${notice.title}</strong>
-                <span style="color: #666; font-size: 0.8em;">${notice.timestamp}</span>
-                <p>${notice.content}</p>
-            `;
-            
-            // Add new notice at the top of the list
-            noticeList.insertBefore(noticeItem, noticeList.firstChild);
-        }
-
-        function loadNotices() {
-            const notices = JSON.parse(localStorage.getItem('notices') || '[]');
-            const noticeList = document.getElementById('notice-list');
-            noticeList.innerHTML = ''; // Clear existing notices
-            
-            notices.forEach(notice => {
-                displayNotice(notice);
-            });
-        }
-
-        // Load notices when page loads
-        document.addEventListener('DOMContentLoaded', loadNotices);
-    </script>
+    <script src="js/teachertaskhandler.js"></script>
 </body>
 </html>
